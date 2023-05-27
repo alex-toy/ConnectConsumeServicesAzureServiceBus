@@ -110,3 +110,9 @@ Azure.Messaging.ServiceBus
 - read the message on the console
 <img src="/pictures/functions3.png" title="azure functions"  width="900">
 
+
+## Azure Functions Topic
+
+- create a new project
+<img src="/pictures/functions_topic.png" title="azure functions topic"  width="900">
+
