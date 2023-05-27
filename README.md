@@ -8,7 +8,10 @@
 
 ### Create Queues
 
-<img src="/pictures/queue.png" title="queue"  width="500">
+<img src="/pictures/queue.png" title="queue"  width="900">
 
 - on *Service Bus Explorer*, you can send messages
-<img src="/pictures/queue2.png" title="queue"  width="500">
+<img src="/pictures/queue2.png" title="queue"  width="900">
+
+- and peek messages
+<img src="/pictures/queue3.png" title="queue"  width="900">
