@@ -1,5 +1,14 @@
 # Connect and Consume Services - Azure Service Bus
 
-## Create namespace
+## Creating and working with the queues
 
-<img src="/pictures/namespace.png" title="namespace"  width="800">
+### Create namespace
+
+<img src="/pictures/namespace.png" title="namespace"  width="500">
+
+### Create Queues
+
+<img src="/pictures/queue.png" title="queue"  width="500">
+
+- on *Service Bus Explorer*, you can send messages
+<img src="/pictures/queue2.png" title="queue"  width="500">
