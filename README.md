@@ -33,3 +33,6 @@ Azure.Messaging.ServiceBus
 - run the program and see the messages show up in the queue
 <img src="/pictures/queue6.png" title="queue"  width="900">
 
+- run the program and see the messages peeked from the queue, but not removed
+<img src="/pictures/queue7.png" title="queue"  width="900">
+

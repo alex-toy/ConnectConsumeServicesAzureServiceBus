@@ -1,7 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace ServiceBusHelpers
 {
@@ -27,6 +25,14 @@ namespace ServiceBusHelpers
                 _message.ContentType = "application/json";
                 _sender.SendMessageAsync(_message).GetAwaiter().GetResult();
             }
+        }
+
+        public Response PeekMessage()
+        {
+            ServiceBusReceiverOptions options = new ServiceBusReceiverOptions() { ReceiveMode = ServiceBusReceiveMode.PeekLock };
+            ServiceBusReceiver _receiver = _client.CreateReceiver(_queueName, options);
+            ServiceBusReceivedMessage _message = _receiver.ReceiveMessageAsync().GetAwaiter().GetResult();
+            return new Response() { Message = _message.Body.ToString(), SequenceNumber = _message.SequenceNumber };
         }
     }
 }
