@@ -1,5 +1,7 @@
-﻿using ServiceBusHelpers;
+﻿using AzureServiceQueueApp.Models;
+using ServiceBusHelpers;
 using System;
+using System.Collections.Generic;
 
 namespace AzureServiceQueueApp
 {
@@ -21,12 +23,30 @@ namespace AzureServiceQueueApp
             //    new Order() {OrderID="O4",Quantity=25,UnitPrice=12.99m},
             //    new Order() {OrderID="O5",Quantity=30,UnitPrice=13.99m }
             //};
-            //serviceBus.SendMessages(orders);
+            //serviceBus.SendMessages(orders, 10);
 
 
-            Response response = serviceBus.PeekMessage();
-            Console.WriteLine(response.Message);
-            Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+            //Response response = serviceBus.PeekMessage();
+            //Console.WriteLine(response.Body);
+            //Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+
+
+            //List<Response> responses = serviceBus.ReceiveMessages(1);
+            //foreach (var response in responses)
+            //{
+            //    Console.WriteLine(response.Body);
+            //    Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+            //}
+
+
+            List<DeadLetterResponse> responses = serviceBus.ReceiveMessagesFromDLQ(3);
+            foreach (var response in responses)
+            {
+                Console.WriteLine(response.Body);
+                Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+                Console.WriteLine($"Dead Letter Reason {response.DeadLetterReason}");
+                Console.WriteLine($"Dead Letter Description {response.DeadLetterErrorDescription}");
+            }
         }
     }
 }

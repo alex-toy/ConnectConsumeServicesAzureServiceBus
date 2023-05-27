@@ -2,7 +2,7 @@
 {
     public class Response
     {
-        public string Message { get; set; }
+        public string Body { get; set; }
         public long SequenceNumber { get; set; }
     }
 }
