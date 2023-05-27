@@ -10,24 +10,16 @@ namespace AzureServiceQueueApp
         static void Main(string[] args)
         {
             //SimpleSend();
+            //SendMessages();
 
 
             //SendWithProperties();
             //ReceiveWithProperties();
 
-            //SendTopic();
-            ReceiveFromTopic();
+            SendTopic();
+            //ReceiveFromTopic();
 
 
-            //List<Order> orders = new List<Order>()
-            //{
-            //    new Order() {OrderID="O1",Quantity=10,UnitPrice=9.99m},
-            //    new Order() {OrderID="O2",Quantity=15,UnitPrice=10.99m },
-            //    new Order() {OrderID="O3",Quantity=20,UnitPrice=11.99m},
-            //    new Order() {OrderID="O4",Quantity=25,UnitPrice=12.99m},
-            //    new Order() {OrderID="O5",Quantity=30,UnitPrice=13.99m }
-            //};
-            //serviceBus.SendMessages(orders, 10);
 
 
             //Response response = serviceBus.PeekMessage();
@@ -53,6 +45,24 @@ namespace AzureServiceQueueApp
             //}
 
             //SendDuplicateMessage();
+        }
+
+        private static void SendMessages()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=wdhLeD91ATZJJHKg8tVo24CQCg6dPDREM+ASbEd8WaA=;EntityPath=appqueue";
+            string queue_name = "appqueue";
+
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            List<Order> orders = new List<Order>()
+            {
+                new Order() {OrderID="01",Quantity=10,UnitPrice=9.99m},
+                new Order() {OrderID="02",Quantity=15,UnitPrice=10.99m },
+                new Order() {OrderID="03",Quantity=20,UnitPrice=11.99m},
+                new Order() {OrderID="04",Quantity=25,UnitPrice=12.99m},
+                new Order() {OrderID="05",Quantity=30,UnitPrice=13.99m }
+            };
+            serviceBus.SendMessages(orders);
         }
 
         private static void SimpleSend()
@@ -117,14 +127,13 @@ namespace AzureServiceQueueApp
             string queue_name = "apptopic";
             var serviceBus = new ServiceBusHelper(connection_string, queue_name);
 
-
             List<Order> orders = new List<Order>()
             {
-                new Order() {OrderID="O1",Quantity=10,UnitPrice=9.99m},
-                new Order() {OrderID="O2",Quantity=15,UnitPrice=10.99m },
-                new Order() {OrderID="O3",Quantity=20,UnitPrice=11.99m},
-                new Order() {OrderID="O4",Quantity=25,UnitPrice=12.99m},
-                new Order() {OrderID="O5",Quantity=30,UnitPrice=13.99m }
+                new Order() {OrderID="01",Quantity=10,UnitPrice=9.99m},
+                new Order() {OrderID="02",Quantity=15,UnitPrice=10.99m },
+                new Order() {OrderID="03",Quantity=20,UnitPrice=11.99m},
+                new Order() {OrderID="04",Quantity=25,UnitPrice=12.99m},
+                new Order() {OrderID="05",Quantity=30,UnitPrice=13.99m }
             };
             serviceBus.SendMessages(orders);
         }

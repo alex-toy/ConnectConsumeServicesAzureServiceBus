@@ -107,15 +107,7 @@ namespace ServiceBusHelpers
         {
             ServiceBusReceiverOptions options = new ServiceBusReceiverOptions() { ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete };
             ServiceBusReceiver _receiver = _client.CreateReceiver(_queueName, subscription, options);
-            IReadOnlyList<ServiceBusReceivedMessage> messages;
-            try
-            {
-                messages = _receiver.ReceiveMessagesAsync(count).GetAwaiter().GetResult();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            IReadOnlyList<ServiceBusReceivedMessage> messages = _receiver.ReceiveMessagesAsync(count).GetAwaiter().GetResult();
 
             var responses = new List<Response>();
             foreach (var message in messages)

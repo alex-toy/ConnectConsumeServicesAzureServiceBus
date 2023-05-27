@@ -83,3 +83,16 @@ Azure.Messaging.ServiceBus
 
 - run *ReceiveFromTopic* and see that the orders have been retrieved
 <img src="/pictures/topic4.png" title="topic"  width="900">
+
+
+## Topic Filters
+
+- add a filter to the subscription based on *SQL*
+<img src="/pictures/filter.png" title="topic filter"  width="900">
+
+- run *SendTopic* and see that only the orders meeting the filters requirements have been received
+<img src="/pictures/filter2.png" title="topic filter"  width="900">
+
+- add a filter to the subscription based on *Correlation*
+<img src="/pictures/filter3.png" title="topic filter"  width="900">
+
