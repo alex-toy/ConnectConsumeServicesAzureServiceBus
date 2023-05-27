@@ -15,6 +15,9 @@ namespace AzureServiceQueueApp
             //SendWithProperties();
             //ReceiveWithProperties();
 
+            //SendTopic();
+            ReceiveFromTopic();
+
 
             //List<Order> orders = new List<Order>()
             //{
@@ -96,6 +99,44 @@ namespace AzureServiceQueueApp
             var serviceBus = new ServiceBusHelper(connection_string, queue_name);
 
             List<Response> responses = serviceBus.ReceiveMessages(1);
+            foreach (var response in responses)
+            {
+                Console.WriteLine(response.Body);
+                Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+                foreach (var property in response.Properties)
+                {
+                    Console.WriteLine($"{property.Key} : {property.Value}");
+                }
+            }
+
+        }
+
+        private static void SendTopic()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=send;SharedAccessKey=oFBip3efjsaKvqJIxNzlWg23V97Qc5Nnx+ASbKYr1cw=;EntityPath=apptopic";
+            string queue_name = "apptopic";
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+
+            List<Order> orders = new List<Order>()
+            {
+                new Order() {OrderID="O1",Quantity=10,UnitPrice=9.99m},
+                new Order() {OrderID="O2",Quantity=15,UnitPrice=10.99m },
+                new Order() {OrderID="O3",Quantity=20,UnitPrice=11.99m},
+                new Order() {OrderID="O4",Quantity=25,UnitPrice=12.99m},
+                new Order() {OrderID="O5",Quantity=30,UnitPrice=13.99m }
+            };
+            serviceBus.SendMessages(orders);
+        }
+
+        private static void ReceiveFromTopic()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=listen;SharedAccessKey=liS0ca+PUUAlsU5CB1bq1UUV6yDyXU26H+ASbMxqk0s=;EntityPath=apptopic";
+            string queue_name = "apptopic";
+
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            List<Response> responses = serviceBus.ReceiveMessagesFromTopic(3, "SubscriptionA");
             foreach (var response in responses)
             {
                 Console.WriteLine(response.Body);

@@ -102,5 +102,43 @@ namespace ServiceBusHelpers
             }
             return responses;
         }
+
+        public List<Response> ReceiveMessagesFromTopic(int count, string subscription)
+        {
+            ServiceBusReceiverOptions options = new ServiceBusReceiverOptions() { ReceiveMode = ServiceBusReceiveMode.ReceiveAndDelete };
+            ServiceBusReceiver _receiver = _client.CreateReceiver(_queueName, subscription, options);
+            IReadOnlyList<ServiceBusReceivedMessage> messages;
+            try
+            {
+                messages = _receiver.ReceiveMessagesAsync(count).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            var responses = new List<Response>();
+            foreach (var message in messages)
+            {
+                var response = new Response()
+                {
+                    Body = message.Body.ToString(),
+                    SequenceNumber = message.SequenceNumber,
+                    Properties = new Dictionary<string, string>()
+                };
+
+                IReadOnlyDictionary<string, object> properties = message.ApplicationProperties;
+                foreach (var property in properties)
+                {
+                    string key = property.Key;
+                    string value = property.Value.ToString();
+                    response.Properties.Add(key, value);
+                }
+                responses.Add(response);
+
+                _receiver.CompleteMessageAsync(message);
+            }
+            return responses;
+        }
     }
 }

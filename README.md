@@ -68,3 +68,18 @@ Azure.Messaging.ServiceBus
 
 - run *ReceiveWithProperties* and retrieve the order as well as  the properties
 <img src="/pictures/qp2.png" title="queue properties"  width="900">
+
+
+## Azure Service Bus Topic
+
+- create a topic
+<img src="/pictures/topic.png" title="topic"  width="500">
+
+- on that topic, create two subscriptions A and B
+<img src="/pictures/topic2.png" title="topic"  width="500">
+
+- run *SendTopic* and see that the orders have been received
+<img src="/pictures/topic3.png" title="topic"  width="900">
+
+- run *ReceiveFromTopic* and see that the orders have been retrieved
+<img src="/pictures/topic4.png" title="topic"  width="900">
