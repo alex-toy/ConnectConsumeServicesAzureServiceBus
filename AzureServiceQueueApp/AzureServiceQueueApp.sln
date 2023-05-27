@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceQueueApp", "AzureServiceQueueApp\AzureServiceQueueApp.csproj", "{04AF2EE2-1E05-4AF8-8DA3-283958879A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureServiceQueueApp", "AzureServiceQueueApp\AzureServiceQueueApp.csproj", "{04AF2EE2-1E05-4AF8-8DA3-283958879A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusHelpers", "ServiceBusHelpers\ServiceBusHelpers.csproj", "{64C56C44-F883-423E-BA09-0F4D3B289A12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusHelpers", "ServiceBusHelpers\ServiceBusHelpers.csproj", "{64C56C44-F883-423E-BA09-0F4D3B289A12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceBusQueue", "AzureServiceBusQueue\AzureServiceBusQueue.csproj", "{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{64C56C44-F883-423E-BA09-0F4D3B289A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64C56C44-F883-423E-BA09-0F4D3B289A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64C56C44-F883-423E-BA09-0F4D3B289A12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

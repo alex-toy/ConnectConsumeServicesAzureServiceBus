@@ -96,3 +96,17 @@ Azure.Messaging.ServiceBus
 - add a filter to the subscription based on *Correlation*
 <img src="/pictures/filter3.png" title="topic filter"  width="900">
 
+
+## Azure Functions
+
+- create a new project
+<img src="/pictures/functions.png" title="azure functions"  width="900">
+
+- run the app
+
+- on the Service Bus Explorer, send a message
+<img src="/pictures/functions2.png" title="azure functions"  width="900">
+
+- read the message on the console
+<img src="/pictures/functions3.png" title="azure functions"  width="900">
+
