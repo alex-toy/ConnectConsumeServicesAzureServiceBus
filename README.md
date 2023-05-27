@@ -15,3 +15,21 @@
 
 - and peek messages
 <img src="/pictures/queue3.png" title="queue"  width="900">
+
+
+## Create .NET project
+
+- install packages
+```
+Azure.Messaging.ServiceBus
+```
+
+- add a send access policy on the queue
+<img src="/pictures/queue4.png" title="queue"  width="900">
+
+- grab a connection string on it
+<img src="/pictures/queue5.png" title="queue"  width="900">
+
+- run the program and see the messages show up in the queue
+<img src="/pictures/queue6.png" title="queue"  width="900">
+
