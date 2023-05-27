@@ -57,5 +57,14 @@ Azure.Messaging.ServiceBus
 - create a new queue and enable duplication detection
 <img src="/pictures/dmd.png" title="duplicate message detection"  width="400">
 
-- run SendDuplicateMessage to try to send the exact same message twice and see that the duplication has been detected
+- run *SendDuplicateMessage* to try to send the exact same message twice and see that the duplication has been detected
 <img src="/pictures/dmd2.png" title="duplicate message detection"  width="900">
+
+
+## Queue properties
+
+- run *SendWithProperties* and see that the properties have been received
+<img src="/pictures/qp.png" title="queue properties"  width="900">
+
+- run *ReceiveWithProperties* and retrieve the order as well as  the properties
+<img src="/pictures/qp2.png" title="queue properties"  width="900">

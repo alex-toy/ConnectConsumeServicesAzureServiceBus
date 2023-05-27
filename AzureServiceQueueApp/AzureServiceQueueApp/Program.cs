@@ -9,10 +9,11 @@ namespace AzureServiceQueueApp
     {
         static void Main(string[] args)
         {
-            //string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=wdhLeD91ATZJJHKg8tVo24CQCg6dPDREM+ASbEd8WaA=;EntityPath=appqueue";
-            //string queue_name = "appqueue";
+            //SimpleSend();
 
-            //var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            //SendWithProperties();
+            //ReceiveWithProperties();
 
 
             //List<Order> orders = new List<Order>()
@@ -48,7 +49,18 @@ namespace AzureServiceQueueApp
             //    Console.WriteLine($"Dead Letter Description {response.DeadLetterErrorDescription}");
             //}
 
-            SendDuplicateMessage();
+            //SendDuplicateMessage();
+        }
+
+        private static void SimpleSend()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=wdhLeD91ATZJJHKg8tVo24CQCg6dPDREM+ASbEd8WaA=;EntityPath=appqueue";
+            string queue_name = "appqueue";
+
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            var order = new Order() { OrderID = "001", Quantity = 10, UnitPrice = 9.99m };
+            serviceBus.SendMessage(order);
         }
 
         private static void SendDuplicateMessage()
@@ -62,6 +74,38 @@ namespace AzureServiceQueueApp
             serviceBus.SendMessage(order1);
             serviceBus.SendMessage(order1);
             serviceBus.SendMessage(order1);
+        }
+
+        private static void SendWithProperties()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=wdhLeD91ATZJJHKg8tVo24CQCg6dPDREM+ASbEd8WaA=;EntityPath=appqueue";
+            string queue_name = "appqueue";
+
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            var order = new Order() { OrderID = "001", Quantity = 10, UnitPrice = 9.99m };
+            var properties = new Dictionary<string, string> { { "departement", "engineering" }, { "boss", "alexei" } };
+            serviceBus.SendMessage(order, properties);
+        }
+
+        private static void ReceiveWithProperties()
+        {
+            string connection_string = "Endpoint=sb://alexeiservicequeuens.servicebus.windows.net/;SharedAccessKeyName=Send;SharedAccessKey=wdhLeD91ATZJJHKg8tVo24CQCg6dPDREM+ASbEd8WaA=;EntityPath=appqueue";
+            string queue_name = "appqueue";
+
+            var serviceBus = new ServiceBusHelper(connection_string, queue_name);
+
+            List<Response> responses = serviceBus.ReceiveMessages(1);
+            foreach (var response in responses)
+            {
+                Console.WriteLine(response.Body);
+                Console.WriteLine($"The Sequence number is {response.SequenceNumber}");
+                foreach (var property in response.Properties)
+                {
+                    Console.WriteLine($"{property.Key} : {property.Value}");
+                }
+            }
+
         }
     }
 }

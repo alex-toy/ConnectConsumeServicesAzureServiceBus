@@ -8,6 +8,7 @@ namespace ServiceBusHelpers
     {
         private readonly string _connectionString;
         private readonly string _queueName;
+        private ServiceBusSender _sender;
         private readonly ServiceBusClient _client;
 
         public ServiceBusHelper(string connectionString, string queueName)
@@ -17,29 +18,27 @@ namespace ServiceBusHelpers
             _client = new ServiceBusClient(connectionString);
         }
 
-        public void SendMessage(Item item, int TTL = 30)
+        public void SendMessage(Item item, Dictionary<string, string> properties = null, int TTL = 30)
         {
-            ServiceBusSender _sender = _client.CreateSender(_queueName);
+            if (_sender == null) _sender = _client.CreateSender(_queueName);
 
             string body = item.ToString();
             ServiceBusMessage message = new ServiceBusMessage(body);
             message.ContentType = "application/json";
             message.TimeToLive = TimeSpan.FromSeconds(TTL);
             message.MessageId = item.Id;
+            if (properties != null)
+            {
+                foreach (var property in properties) message.ApplicationProperties.Add(property.Key, property.Value);
+            }
             _sender.SendMessageAsync(message).GetAwaiter().GetResult();
         }
 
-        public void SendMessages(IEnumerable<Item> items, int TTL = 30)
+        public void SendMessages(IEnumerable<Item> items, Dictionary<string, string> properties = null, int TTL = 30)
         {
-            ServiceBusSender _sender = _client.CreateSender(_queueName);
-
             foreach (var item in items)
             {
-                string body = item.ToString();
-                ServiceBusMessage message = new ServiceBusMessage(body);
-                message.ContentType = "application/json";
-                message.TimeToLive = TimeSpan.FromSeconds(TTL);
-                _sender.SendMessageAsync(message).GetAwaiter().GetResult();
+                SendMessage(item, properties, TTL);
             }
         }
 
@@ -60,11 +59,22 @@ namespace ServiceBusHelpers
             var responses = new List<Response>();
             foreach (var message in messages)
             {
-                responses.Add(new Response()
+                var response = new Response()
                 {
                     Body = message.Body.ToString(),
-                    SequenceNumber = message.SequenceNumber
-                });
+                    SequenceNumber = message.SequenceNumber,
+                    Properties = new Dictionary<string, string>()
+                };
+
+                IReadOnlyDictionary<string, object> properties = message.ApplicationProperties;
+                foreach (var property in properties)
+                {
+                    string key = property.Key;
+                    string value = property.Value.ToString();
+                    response.Properties.Add(key, value);
+                }
+                responses.Add(response);
+
                 _receiver.CompleteMessageAsync(message);
             }
             return responses;
