@@ -50,3 +50,12 @@ Azure.Messaging.ServiceBus
 
 - run *ReceiveMessagesFromDLQ* and see the messages deleted in the  dead letter queue
 <img src="/pictures/dlq3.png" title="dead letter queue"  width="900">
+
+
+## Duplicate Message Detection
+
+- create a new queue and enable duplication detection
+<img src="/pictures/dmd.png" title="duplicate message detection"  width="400">
+
+- run SendDuplicateMessage to try to send the exact same message twice and see that the duplication has been detected
+<img src="/pictures/dmd2.png" title="duplicate message detection"  width="900">

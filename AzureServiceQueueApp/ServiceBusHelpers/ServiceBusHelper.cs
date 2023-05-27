@@ -17,6 +17,18 @@ namespace ServiceBusHelpers
             _client = new ServiceBusClient(connectionString);
         }
 
+        public void SendMessage(Item item, int TTL = 30)
+        {
+            ServiceBusSender _sender = _client.CreateSender(_queueName);
+
+            string body = item.ToString();
+            ServiceBusMessage message = new ServiceBusMessage(body);
+            message.ContentType = "application/json";
+            message.TimeToLive = TimeSpan.FromSeconds(TTL);
+            message.MessageId = item.Id;
+            _sender.SendMessageAsync(message).GetAwaiter().GetResult();
+        }
+
         public void SendMessages(IEnumerable<Item> items, int TTL = 30)
         {
             ServiceBusSender _sender = _client.CreateSender(_queueName);
