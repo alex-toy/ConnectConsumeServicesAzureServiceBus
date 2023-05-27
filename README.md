@@ -116,3 +116,11 @@ Azure.Messaging.ServiceBus
 - create a new project
 <img src="/pictures/functions_topic.png" title="azure functions topic"  width="900">
 
+- run the app
+
+- on the Service Bus Explorer, send a message
+<img src="/pictures/functions_topic2.png" title="azure functions topic"  width="900">
+
+- read the message on the console
+<img src="/pictures/functions_topic3.png" title="azure functions topic"  width="900">
+

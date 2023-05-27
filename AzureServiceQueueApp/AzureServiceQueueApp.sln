@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceBusHelpers", "Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceBusQueue", "AzureServiceBusQueue\AzureServiceBusQueue.csproj", "{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServiceBusTopic", "AzureServiceBusTopic\AzureServiceBusTopic.csproj", "{2F4AAC9D-7380-475E-82FB-D32D8F108ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2EB0D25-80EC-4963-AB81-EE0E49B30DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4AAC9D-7380-475E-82FB-D32D8F108ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4AAC9D-7380-475E-82FB-D32D8F108ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4AAC9D-7380-475E-82FB-D32D8F108ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4AAC9D-7380-475E-82FB-D32D8F108ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
